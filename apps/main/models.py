@@ -61,3 +61,24 @@ class Resume(BaseModel):
 
     def __str__(self):
         return self.full_name
+
+
+class Document(BaseModel):
+    name = models.CharField(max_length=32)
+    file = models.FileField(upload_to="apps/main/documents", null=True, blank=True)
+
+
+class Project(models.Model):
+    name = models.CharField()
+    desc = models.CharField()
+    photo = models.ImageField(upload_to="apps/main/photo_project", null=True, blank=True)
+    our_goals = models.TextField()
+    documents = models.ForeignKey("main.Document", on_delete=models.CASCADE, verbose_name="document")
+    project_member = models.ForeignKey("main.Management", on_delete=models.CASCADE, verbose_name="project_members")
+
+
+class Comment(BaseModel):
+    full_name = models.CharField(max_length=128)
+    email = models.EmailField()
+    text = models.TextField()
+    project = models.ForeignKey("main.Project", on_delete=models.CASCADE, verbose_name="project")

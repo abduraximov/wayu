@@ -14,3 +14,6 @@ class Payment(BaseModel):
     amount = models.IntegerField()
     purpose_payment = models.ForeignKey("payments.PurposePayment", on_delete=models.SET_NULL, related_name="payment")
     doc_file = models.FileField(upload_to="apps/payments/doc_files", null=True, blank=True)
+
+    def __str__(self):
+        return self.full_name

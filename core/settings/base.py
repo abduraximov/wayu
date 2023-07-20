@@ -49,6 +49,7 @@ CUSTOM_APPS = [
     "apps.common",
     "apps.posts",
     "apps.payments",
+    "apps.main",
 ]
 
 THIRD_PARTY_APPS = [

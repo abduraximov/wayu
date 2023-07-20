@@ -33,3 +33,6 @@ class Post(BaseModel):
     views = models.IntegerField()
     about_us = models.BooleanField(default=False)
     region = models.ForeignKey("posts.Region", on_delete=models.CASCADE, related_name="region")
+
+    def __str__(self):
+        return self.title

@@ -22,7 +22,7 @@ class Management(BaseModel):
     full_name = models.CharField(max_length=128)
     photo = models.ImageField(upload_to="apps/main/photos", null=True, blank=True)
     days_admission = models.CharField()
-    position = models.ForeignKey("main.Position", on_delete=models.CASCADE, verbose_name="position")
+    position = models.ForeignKey("main.Position", on_delete=models.CASCADE, related_name="position")
     phone_number = models.CharField(max_length=16, null=True, blank=True)
     email = models.EmailField(max_length=64)
     biography = models.TextField()
@@ -36,7 +36,7 @@ class Management(BaseModel):
 
 class Branch(models.Model):
     name = models.CharField(max_length=32)
-    delegate = models.ForeignKey("main.Delegate", on_delete=models.CASCADE, verbose_name="delegate")
+    delegate = models.ForeignKey("main.Delegate", on_delete=models.CASCADE, related_name="delegate")
     location = models.CharField()
 
     def __str__(self):
@@ -44,7 +44,7 @@ class Branch(models.Model):
 
 
 class Vacancy(BaseModel):
-    position = models.ForeignKey("main.Position", on_delete=models.CASCADE, verbose_name="position")
+    position = models.ForeignKey("main.Position", on_delete=models.CASCADE, related_name="position")
     location = models.CharField()
     requirements = models.TextField()
     salary = models.IntegerField(max_length=128)
@@ -73,12 +73,12 @@ class Project(models.Model):
     desc = models.CharField()
     photo = models.ImageField(upload_to="apps/main/photo_project", null=True, blank=True)
     our_goals = models.TextField()
-    documents = models.ForeignKey("main.Document", on_delete=models.CASCADE, verbose_name="document")
-    project_member = models.ForeignKey("main.Management", on_delete=models.CASCADE, verbose_name="project_members")
+    documents = models.ForeignKey("main.Document", on_delete=models.CASCADE, related_name="document")
+    project_member = models.ForeignKey("main.Management", on_delete=models.CASCADE, related_name="project_members")
 
 
 class Comment(BaseModel):
     full_name = models.CharField(max_length=128)
     email = models.EmailField()
     text = models.TextField()
-    project = models.ForeignKey("main.Project", on_delete=models.CASCADE, verbose_name="project")
+    project = models.ForeignKey("main.Project", on_delete=models.CASCADE, related_name="project")
